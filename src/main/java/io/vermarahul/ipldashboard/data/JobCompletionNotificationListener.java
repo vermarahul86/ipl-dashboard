@@ -1,4 +1,4 @@
-package io.javabrains.ipldashboard.data;
+package io.vermarahul.ipldashboard.data;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -12,10 +12,9 @@ import org.springframework.batch.core.BatchStatus;
 import org.springframework.batch.core.JobExecution;
 import org.springframework.batch.core.listener.JobExecutionListenerSupport;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
-import io.javabrains.ipldashboard.model.Team;
+import io.vermarahul.ipldashboard.model.Team;
 
 @Component
 public class JobCompletionNotificationListener extends JobExecutionListenerSupport {
@@ -48,7 +47,7 @@ public class JobCompletionNotificationListener extends JobExecutionListenerSuppo
         .stream()
         .forEach(e -> {
             Team team = teamData.get((String) e[0]);
-            team.setTotalMatches(team.getTotalMatches() + (long) e[1]);
+            team.setTotalMatches(team.getTotalMatches() + (long) e[1]); 
         });
 
         em.createQuery("select m.matchWinner, count(*) from Match m group by m.matchWinner", Object[].class)
@@ -59,8 +58,9 @@ public class JobCompletionNotificationListener extends JobExecutionListenerSuppo
             if (team != null) team.setTotalWins((long) e[1]);
         });
 
-        teamData.values().forEach(team -> em.persist(team));
-        teamData.values().forEach(team -> System.out.println(team));
+//        teamData.values().forEach(team -> em.persist(team));
+        teamData.values().forEach(this.em::persist);
+       teamData.values().forEach(System.out::println);
     }
   }
 }

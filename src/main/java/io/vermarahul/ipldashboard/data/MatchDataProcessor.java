@@ -1,4 +1,4 @@
-package io.javabrains.ipldashboard.data;
+package io.vermarahul.ipldashboard.data;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -8,7 +8,7 @@ import org.slf4j.LoggerFactory;
 
 import org.springframework.batch.item.ItemProcessor;
 
-import io.javabrains.ipldashboard.model.Match;
+import io.vermarahul.ipldashboard.model.Match;
 
 public class MatchDataProcessor implements ItemProcessor<MatchInput, Match> {
 

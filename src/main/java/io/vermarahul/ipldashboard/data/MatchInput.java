@@ -1,4 +1,4 @@
-package io.javabrains.ipldashboard.data;
+package io.vermarahul.ipldashboard.data;
 
 public class MatchInput {
     private String id;
